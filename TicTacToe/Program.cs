@@ -83,7 +83,7 @@ namespace TicTacToe
             else
             {
                 Clear();
-                WriteLine("Already placed!");
+                WriteLine("Already placed here!");
                 ReadLine();
                 Clear();
             }
