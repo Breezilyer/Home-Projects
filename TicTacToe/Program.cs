@@ -11,7 +11,7 @@ namespace TicTacToe
         static void Main()
         {
             WriteLine("Welcome to TicTacToe!");
-            WriteLine("Press enter to continue");
+            WriteLine("Press 'Enter' to continue");
             ReadLine();
             Clear();
 
