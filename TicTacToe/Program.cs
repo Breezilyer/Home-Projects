@@ -107,5 +107,10 @@ namespace TicTacToe
                 }
             }
         }
+        // Make a method where the player can win
+        static void gameWon()
+        {
+            // Put code here
+        }
     }
 }
