@@ -1,4 +1,4 @@
-﻿using static System.Console;
+using static System.Console;
 
 namespace TicTacToe
 {
@@ -26,10 +26,11 @@ namespace TicTacToe
         {
             board = new char[,]
             {
-                { '1', ' ', ' ', ' ' },
-                { '2', ' ', ' ', ' ' },
-                { '3', ' ', ' ', ' ' },
-                { ' ', '1', '2', '3' }
+                { 'Y', ' ', ' ', ' ', ' ' },
+                { '1', ' ', ' ', ' ', ' ' },
+                { '2', ' ', ' ', ' ', ' ' },
+                { '3', ' ', ' ', ' ', ' ' },
+                { ' ', '1', '2', '3', 'X' }
             };
             Draw();
         }
@@ -74,10 +75,10 @@ namespace TicTacToe
 
         static void isPlaceable(char player)
         {
-            if (board[x - 1, y] == ' ')
+            if (board[y, x] == ' ')
             {
                 playerXTurn = !playerXTurn;
-                board[x - 1, y] = player;
+                board[y, x] = player;
                 Clear();
             }
             else
