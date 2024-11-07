@@ -34,7 +34,6 @@ namespace TicTacToe
             };
             Draw();
         }
-
         static void Draw()
         {
             for (int col = 0; col < board.GetLength(0); col++)
@@ -46,8 +45,7 @@ namespace TicTacToe
                 }
             }
         }
-
-        static void playerTurnX()
+        static void playerTurn(char player)
         {
             Write("X: ");
             string X = ReadLine()!;
@@ -56,23 +54,9 @@ namespace TicTacToe
             string Y = ReadLine()!;
             y = Convert.ToInt32(Y);
 
-            isPlaceable('X');
+            isPlaceable(player);
             Draw();
         }
-
-        static void playerTurnY()
-        {
-            Write("X: ");
-            string X = ReadLine()!;
-            x = Convert.ToInt32(X);
-            Write("Y: ");
-            string Y = ReadLine()!;
-            y = Convert.ToInt32(Y);
-
-            isPlaceable('O');
-            Draw();
-        }
-
         static void isPlaceable(char player)
         {
             if (board[y, x] == ' ')
@@ -89,7 +73,6 @@ namespace TicTacToe
                 Clear();
             }
         }
-
         static void runGameLoop()
         {
             while (true)
@@ -97,13 +80,13 @@ namespace TicTacToe
                 if (playerXTurn == true)
                 {
                     WriteLine("\nPlayer X's turn: ");
-                    playerTurnX();
+                    playerTurn('X');
                 }
 
                 if (playerXTurn == false)
                 {
                     WriteLine("\nPlayer O's turn: ");
-                    playerTurnY();
+                    playerTurn('O');
                 }
             }
         }
