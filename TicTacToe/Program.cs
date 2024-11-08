@@ -13,6 +13,7 @@ namespace TicTacToe
         static bool playerXTurn = true;
         static void Main()
         {
+            Clear();
             WriteLine("Welcome to TicTacToe!");
             WriteLine("Press 'Enter' to continue");
             ReadLine();
@@ -38,6 +39,8 @@ namespace TicTacToe
             }
 
             ReadLine();
+            moveCount = 0;
+            Main();
         }
         static void InitBoard()
         {
