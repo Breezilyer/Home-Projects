@@ -7,6 +7,9 @@ namespace TicTacToe
         private static char[,] board;
         static int x;
         static int y;
+        static bool draw = false;
+        static int moveCount = 0;
+
         static bool playerXTurn = true;
         static void Main()
         {
@@ -19,6 +22,20 @@ namespace TicTacToe
             InitBoard();
 
             runGameLoop();
+            Draw();
+            WriteLine();
+            if (draw == false && playerXTurn == true)
+            {
+                WriteLine("Game Over! X won!");
+            } 
+            else if (draw == false && playerXTurn == false)
+            {
+                WriteLine("Game Over! O won!");
+            }
+            else
+            {
+                WriteLine("Draw!");
+            }
 
             ReadLine();
         }
@@ -45,7 +62,7 @@ namespace TicTacToe
                 }
             }
         }
-        static void playerTurn(char player)
+        static bool playerTurn(char player)
         {
             Write("X: ");
             string X = ReadLine()!;
@@ -54,16 +71,15 @@ namespace TicTacToe
             string Y = ReadLine()!;
             y = Convert.ToInt32(Y);
 
-            isPlaceable(player);
-            Draw();
+            return isPlaceable(player);
         }
-        static void isPlaceable(char player)
+        static bool isPlaceable(char player)
         {
             if (board[y, x] == ' ')
             {
-                playerXTurn = !playerXTurn;
                 board[y, x] = player;
                 Clear();
+                return true;
             }
             else
             {
@@ -71,29 +87,64 @@ namespace TicTacToe
                 WriteLine("Already placed here!");
                 ReadLine();
                 Clear();
+                return false;
             }
         }
         static void runGameLoop()
         {
             while (true)
             {
-                if (playerXTurn == true)
+                Draw();
+                char player = playerXTurn ? 'X' : 'O';
+
+                WriteLine($"\nPlayer {player}'s turn: ");
+                bool moveSucces = playerTurn(player);
+
+                if (moveSucces == false)
                 {
-                    WriteLine("\nPlayer X's turn: ");
-                    playerTurn('X');
+                    continue;
                 }
 
-                if (playerXTurn == false)
+                moveCount++;
+
+                if (isGameOver() == true)
                 {
-                    WriteLine("\nPlayer O's turn: ");
-                    playerTurn('O');
+                    break;
                 }
+
+                if (moveCount == 9)
+                {
+                    draw = true;
+                    break;
+                }
+
+                playerXTurn = !playerXTurn;
             }
         }
         // Make a method where the player can win
-        static void gameWon()
+        static bool isGameOver()
         {
-            // Put code here
+            for (int i = 1; i <= 3; i++)
+            {
+                if (board[i, 1] != ' ' && board[i,1] == board[i,2] && board[i,2] == board[i,3])
+                {
+                    return true;
+                }
+                if (board[1, i] != ' ' && board[1, i] == board[2,i] && board[2,i] == board[3,i])
+                {
+                    return true;
+                }
+            }
+
+            if (board[1,1] != ' ' && board[1,1] == board[2,2] && board[2,2] == board[3,3])
+            {
+                return true;
+            }
+            if (board[3, 1] != ' ' && board[3, 1] == board[2, 2] && board[2, 2] == board[1, 3])
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
