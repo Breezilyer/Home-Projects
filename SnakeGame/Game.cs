@@ -61,8 +61,29 @@ namespace SnakeGame
             switch(key)
             {
                 case ConsoleKey.UpArrow:
-
-                    break;
+                    if (Board.isPositionWalkable(Player.X, Player.Y - 1))
+                    {
+                        Player.Y--;
+                    }
+                break;
+                case ConsoleKey.DownArrow:
+                    if (Board.isPositionWalkable(Player.X, Player.Y + 1))
+                    {
+                        Player.Y++;
+                    }
+                break;
+                case ConsoleKey.LeftArrow:
+                    if (Board.isPositionWalkable(Player.X - 1, Player.Y))
+                    {
+                        Player.X--;
+                    }
+                break;
+                case ConsoleKey.RightArrow:
+                    if (Board.isPositionWalkable(Player.X + 1, Player.Y))
+                    {
+                        Player.X++;
+                    }
+                break;
             }
         }
 
@@ -86,7 +107,8 @@ namespace SnakeGame
             while (true)
             {
                 drawFrame();
-                System.Threading.Thread.Sleep(100);
+                inputHandler();
+                System.Threading.Thread.Sleep(20);
             }
         }
     }

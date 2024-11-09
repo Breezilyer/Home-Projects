@@ -34,10 +34,14 @@ namespace SnakeGame
                     Console.Write(Grid[x, y]);
                 }
         }
-
-        public bool isPositionWalkable()
+        public int getElement(int x, int y)
         {
-
+            return Grid[x,y];
+        }
+        public bool isPositionWalkable(int x, int y)
+        {
+            if(x < 0 || y < 0 || x >= cols || y >= rows) return false;
+            return Grid[y,x] == ' ' || Grid[y,x] == 'A';
         }
     }
 }
