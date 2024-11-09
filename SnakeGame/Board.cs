@@ -30,16 +30,14 @@ namespace SnakeGame
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
-                    else if (element == 'S')
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                    }
-
-
-
                     Console.SetCursorPosition(y, x);
                     Console.Write(Grid[x, y]);
                 }
+        }
+
+        public bool isPositionWalkable()
+        {
+
         }
     }
 }
