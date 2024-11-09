@@ -89,7 +89,7 @@ namespace SnakeGame
 
         private void intro()
         {
-            WriteLine("Welcome to the maze!");
+            WriteLine("Welcome to Snake Game!");
             WriteLine("\nInstructions:");
             WriteLine("> Use the arrow keys to move");
             Write("> Try to eat as many foods as you can, which looks like this: ");
