@@ -30,18 +30,22 @@ namespace SnakeGame
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
+                    if (element == 'S')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
                     Console.SetCursorPosition(y, x);
                     Console.Write(Grid[x, y]);
                 }
         }
-        public int getElement(int x, int y)
+        public char getElemant(int x, int y)
         {
-            return Grid[x,y];
+            return Grid[y, x];
         }
         public bool isPositionWalkable(int x, int y)
         {
             if(x < 0 || y < 0 || x >= cols || y >= rows) return false;
-            return Grid[y,x] == ' ' || Grid[y,x] == 'A';
+            return Grid[y,x] == ' ' || Grid[y,x] == 'A' || Grid[y,x] == '#';
         }
     }
 }

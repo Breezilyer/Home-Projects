@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RealTimeInput;
 using static System.Console;
+
 
 namespace SnakeGame
 {
@@ -11,13 +13,23 @@ namespace SnakeGame
     {
         private Board Board;
         private Player Player;
+        private char[,] board;
         public void Start()
         {
-            Console.CursorVisible = false;
-            Console.Title = "Snake Game";
-            char[,] board =
+            CursorVisible = false;
+            Title = "Snake Game";
+
+            board = new char[,]
             {
                 { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
                 { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
                 { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
                 { '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
@@ -42,7 +54,7 @@ namespace SnakeGame
             };
 
             Board = new Board(board);
-            Player = new Player(10, 4);
+            Player = new Player(22, 14);
             runGameLoop();
             ReadLine();
         }
@@ -53,37 +65,36 @@ namespace SnakeGame
             Player.Draw();
         }
 
+
         private void inputHandler()
         {
-            ConsoleKeyInfo keyInfo = ReadKey(true);
-            ConsoleKey key = keyInfo.Key;
-
-            switch(key)
+            if (Keyboard.IsKeyDown((int)'W'))
             {
-                case ConsoleKey.UpArrow:
-                    if (Board.isPositionWalkable(Player.X, Player.Y - 1))
-                    {
-                        Player.Y--;
-                    }
-                break;
-                case ConsoleKey.DownArrow:
-                    if (Board.isPositionWalkable(Player.X, Player.Y + 1))
-                    {
-                        Player.Y++;
-                    }
-                break;
-                case ConsoleKey.LeftArrow:
-                    if (Board.isPositionWalkable(Player.X - 1, Player.Y))
-                    {
-                        Player.X--;
-                    }
-                break;
-                case ConsoleKey.RightArrow:
-                    if (Board.isPositionWalkable(Player.X + 1, Player.Y))
-                    {
-                        Player.X++;
-                    }
-                break;
+                if (Board.isPositionWalkable(Player.X, Player.Y - 1))
+                {
+                    Player.Y--;
+                }
+            }
+            if (Keyboard.IsKeyDown((int)'S'))
+            {
+                if (Board.isPositionWalkable(Player.X, Player.Y + 1))
+                {
+                    Player.Y++;
+                }
+            }
+            if (Keyboard.IsKeyDown((int)'A'))
+            {
+                if (Board.isPositionWalkable(Player.X - 1, Player.Y))
+                {
+                    Player.X--;
+                }
+            }
+            if (Keyboard.IsKeyDown((int)'D'))
+            {
+                if (Board.isPositionWalkable(Player.X + 1, Player.Y))
+                {
+                    Player.X++;
+                }
             }
         }
 
@@ -100,7 +111,16 @@ namespace SnakeGame
             ReadKey(true);
             Clear();
         }
-
+        private void gameOver()
+        {
+            SetCursorPosition(16, 13);
+            WriteLine("Game Over!");
+            SetCursorPosition(10, 14);
+            WriteLine("Press 'Enter' to restart");
+            ReadLine();
+            Clear();
+            Start();
+        }
         private void runGameLoop()
         {
             intro();
@@ -108,8 +128,16 @@ namespace SnakeGame
             {
                 drawFrame();
                 inputHandler();
+                char getElementPos = Board.getElemant(Player.X, Player.Y);
+                if (getElementPos == '#')
+                {
+                    break;
+                }
+
+
                 System.Threading.Thread.Sleep(20);
             }
+            gameOver();
         }
     }
 }
